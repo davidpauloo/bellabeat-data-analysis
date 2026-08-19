@@ -39,6 +39,62 @@ Currentness (Low): The data was collected over a one-month window in March-May 2
 Citation (High) Dedicated open dataset under CC0: Public Domain license.
 
 ### 3. Data Limitations & Business Implications
-Absence of Demographic Bellabeat builds wellness hardware specifically targeted at woemn. Because gender is not specified in the FitBit dataset, insights must be framed as generalized smart tracker behavior and validated against Bellabeat's target audience.
-Temporal Limitation: The 2016 timeframe rrepresents legacy tracker patterns. Recommendations will focus on fundamental human habits (e.g., sedentary working hours vs. rest periods) rather than short-term app engagement trends.
+Absence of Demographic Bellabeat builds wellness hardware specifically targeted at women. Because gender is not specified in the FitBit dataset, insights must be framed as generalized smart tracker behavior and validated against Bellabeat's target audience.
+Temporal Limitation: The 2016 timeframe represents legacy tracker patterns. Recommendations will focus on fundamental human habits (e.g., sedentary working hours vs. rest periods) rather than short-term app engagement trends.
 
+## Phase 3: Process
+1. Tools Used:
+Python (NumPy, Pandas): Used for data transformation, manipulation, deduplication, and datetime parsing.
+Matplotlib & Seaborn: Data visualization and exploratory charts.
+
+2. Data Cleaning & Transformation Steps
+Deduplications: Identified and removed 3 duplicate records found within `sleepDay_merged.csv`.
+Missing Value Audit: Confirmed 0 null or missing values across both primary tables.
+Datetime Standardization: Parsed `ActivityDate` and `SleepDate` from object strings to formal ISO datetime formats.
+Feature Engineering: Extracted `DayOfWeek` from activity timestamps to evaluate day-specific user habits.
+Data Integration: Performed an inner merge on `Id` and `ActivityDate` to combine daily physical metrics with sleep duration records.
+
+## Phase 4: Analyze
+
+Key findings
+Dominant Sedentary Behavior: Users spend an overwhelming **81.3%** of their daily recorded time inactive/sedentary, with high-intensity active time accounting for only **1.7%
+Sub-Optimal Daily Activity: Users average ~7,600 steps per day, consistently falling short of the recommended 10,000-step baseline. 
+Weekly Fluctuations: Activity levels peak mid-week (Tuesday) and on Saturdays, followed by a noticeable drop on Sundays.
+Sleep vs. Time in bed: Users average ~419 minutes (~7 hours) of actual sleep out of ~458 minutes spent in bed, indicating approximately 39 minutes of latency/wakefulness before falling asleep or getting up.
+
+
+## Phase 5: Share
+
+1. Daily User Activity Breakdown (`visualization/activity_distribution.png`)
+
+   What is shows: A proportional breakdown of walking minutes across four intensity levels: Sedentary, Lightly Active, Fairly Active, and Very Active.
+   Takeaway: Smart device users spend the vast majority of they day sedentary (over 81%), highlighting a major opportunity to convert idle desk/screen time into light movement.
+
+2. Weekly Step Patterns (`visualization/daily_steps_trend.png`)
+
+   What it shows: Average total steps logged across each day of the week, benchmarked against the standard 10,000 steps a day target.
+   Takeaway: Users maintain steady engagement from Tuesday through Sunday (~7,500 - 8,100 steps) but drop significantly on Sundays (~6,900 steps), indicating a clear weekend drop-off in routine                tracking and movement.
+3. Calorie Expenditure vs. Total Steps (`visualization/steps_vs_calories.png`)
+
+   What it shows: Scatter plot with an overlay linear regression trend line that measures caloric burn relative to total daily steps.
+   Takeaway: Confirms a strong positive correlation ($R > 0.5$) between daily step volume and calories burned, validates that consistent low-to-moderate activity yields steady caloric output.
+
+
+## Phase 6: Act
+
+Based on behavioral patterns identified in the data, here are three strategic marketing and product recommendations for the Bellabeat Leaf
+
+1. Promote Discreet Sedentary Alerts
+   
+   Insights: Over 80% if daily tracker time is sedentary
+   Strategy: Leverage the Bellabeat Leaf as an everyday fashion accessory (necklace, bracelet, or clip) designed to provide subtle, silent vibration reminders during long work hours to break up                sedentary stretches
+   
+2. Gamified Weekend & Mid-Week Step Challenges
+
+   Insights: Step volume dips toward the end of the workweek and hits a low on Sunday.
+   Strategy: Introduce an app-based "Sunday Reset" and "Mid-Week Boost" streak challenges via the Bellabeat App to incentivize users to hit 10,000 steps consistently across all seven days
+
+3. Bedtime Relaxation & Sleep Optimization Content
+
+   Insights: Users spend nearly 40 minutes awake or restless in bed before falling asleep.
+   Strategy: Leverage Leaf's lightweight, screen-free form factor
